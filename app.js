@@ -51,21 +51,147 @@ function fetch() {
  * - 
  * MIN, FG, FGA, 3P 3PA, FT, FTA, OR, DR, TOT, A , PF, ST, TO BL PTS
  */
-nba.stats.playerClutchStats({ Season: '2017-18' }, (err, res) => {
+function playerClutchStats() {
+  nba.stats.playerClutchStats({ Season: '2017-18' }, (err, res) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    var x = JSON.stringify(res)
+    var q = JSON.parse(x)
+    var data=[]
+    data.push(q)
+  
+    console.log()
+  
+    for (iloop = 0; iloop < data[0].LeagueDashPlayerClutch.length; iloop++) {
+      var arr = {}
+      arr.group_set = x[iloop]
+      var content = data[0].LeagueDashPlayerClutch[iloop]
+      
+      db.query('insert into playerClutchStats content ' + JSON.stringify(content))
+        .then(function (inserted) {
+          console.log(inserted)
+        })
+    }
+  });
+  
+}
+
+
+
+function Lineups() {
+nba.stats.lineups({ Season: '2017-18' }, (err, res) => {
   if (err) {
     console.error(err);
     return;
   }
   var x = JSON.stringify(res)
   var q = JSON.parse(x)
-  console.log(q)
+  var data=[]
+  data.push(q)
 
-  for (iloop = 0; iloop < x.length; iloop++) {
+  console.log()
+
+  for (iloop = 0; iloop < data[0].Lineups.length; iloop++) {
+
+    var content = data[0].Lineups[iloop]
+    
+    db.query('insert into Lineups content ' + JSON.stringify(content))
+      .then(function (inserted) {
+        console.log(inserted)
+      })
+  }
+});
+}
+
+
+
+
+
+
+function playerBioStats() {
+nba.stats.playerBioStats({ Season: '2017-18' }, (err, res) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  var x = JSON.stringify(res)
+  var q = JSON.parse(x)
+  var data=[]
+  data.push(q)
+
+  
+
+  for (iloop = 0; iloop < data[0].LeagueDashPlayerBioStats.length; iloop++) {
     var arr = {}
     arr.group_set = x[iloop]
-    //console.log(arr)
+    var content = data[0].LeagueDashPlayerBioStats[iloop]
+    
+    db.query('insert into playerBioStats content ' + JSON.stringify(content))
+      .then(function (inserted) {
+        console.log(inserted)
+      })
   }
-
-//  console.log(q);
 });
+}
+
+
+function playerCareerStats() {
+//get player id's from orientdb
+var playerids='select distinct(player_id) as pid from playerBioStats'
+
+db.query(playerids)
+  .then(function (playerstats) {
+      // loop through results to pass as param
+      console.log(playerstats.length)
+      for (id =0; id < playerstats.length; id++) {
+        var id = playerstats[id].pid;
+       
+        //pass playerid as a param to endpoints
+          nba.stats.playerCareerStats({ PlayerID: id }, (err, res) => {
+            if (err) {
+              console.error(err);
+              return;
+            }
+            var x = JSON.stringify(res)
+            var q = JSON.parse(x)
+            var data=[]
+            data.push(q)
+            console.log(data[0].SeasonTotalsRegularSeason.length)
+
+            
+            // second loop within loop to parse data and insert into db. 
+            for (iloop = 0; iloop < data[0].SeasonTotalsRegularSeason.length; iloop++) {
+              var arr = {}
+              arr.group_set = x[iloop]
+              var content = data[0].SeasonTotalsRegularSeason[iloop]
+              
+              db.query('insert into playerCareerStats content ' + JSON.stringify(content))
+                .then(function (inserted) {
+                  console.log(inserted)
+                })
+            }
+          });
+      }
+    
+  })
+
+}
+
+function resetdb() {
+  db.query('select cleardb()')
+    .then((cleared) => {
+      console.log('database reset complete')
+    })
+}
+
+
+//resetdb()
+//playerClutchStats()
+//playerBioStats()
+//Lineups()
+//playerCareerStats()
+
+
 
