@@ -13,6 +13,7 @@
     "sports"
   ],
   "dependencies": {
+    "asynquence": "^0.10.2",
     "camel-case": "^3.0.0",
     "debug": "^2.2.0",
     "dotenv": "latest",
