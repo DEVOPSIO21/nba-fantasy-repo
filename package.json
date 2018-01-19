@@ -14,9 +14,14 @@
   ],
   "dependencies": {
     "asynquence": "^0.10.2",
+    "bunyan": "latest",
     "camel-case": "^3.0.0",
+    "compression": "^1.6.2",
+    "date-and-time": "0.2",
     "debug": "^2.2.0",
     "dotenv": "latest",
+    "express": "^4.13.4",
+    "express-bunyan-logger": "latest",
     "isomorphic-fetch": "^2.2.1",
     "jsonp": "^0.2.0",
     "lodash.find": "^3.2.0",
@@ -31,7 +36,9 @@
     "nba.js": "^0.6.0",
     "node-fetch": "^1.6.3",
     "orientjs": "latest",
-    "pify": "^2.3.0"
+    "pify": "^2.3.0",
+    "request-debug": "^0.2.0",
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
     "babel": "^5.8.23",
