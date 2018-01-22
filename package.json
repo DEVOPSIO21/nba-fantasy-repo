@@ -36,6 +36,7 @@
     "nba.js": "^0.6.0",
     "node-fetch": "^1.6.3",
     "orientjs": "latest",
+    "oracledb": "latest",
     "pify": "^2.3.0",
     "request-debug": "^0.2.0",
     "request-promise": "^4.2.2"

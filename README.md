@@ -57,18 +57,20 @@ function playerstats(player_id, game_id, callback) {              // function to
 - examples
   - get csv for home games will be something like `http://someurl.com/games/home/1610612741`
   - get csv for periods in a game. will be something like `http://someurl.com/games/statistics/1610612741/period1`
-  
+
+
+
 ```sql
 select from teams
-select expand(out(Members)) from teams where tricode='BKN'
-select expand(Home) from games where home_team='1610612741'  
-select expand(Home) from games where away_team='1610612741'  
-select from games where gameId='0021700608'
-select expand(in(PlayedIn)) from games where gameId='0021700608'
-select expand(in(PlayedIn)) from games where gameId='0021700608'
-select from stats
-select flatten(out(Statistics)['Period1']) from games where gameId='0021700608'
-select flatten(out(Statistics)['Period2']) from games where gameId='0021700608'
-select flatten(out(Statistics)['Period3']) from games where gameId='0021700608'
-select flatten(out(Statistics)['Period4']) from games where gameId='0021700608'
+select expand(out(Members)) from teams where tricode='BKN'   ;
+select expand(Home) from games where home_team='1610612741'  ;
+select expand(Home) from games where away_team='1610612741'  ;
+select from games where gameId='0021700608';
+select expand(in(PlayedIn)) from games where gameId='0021700608';
+select expand(in(PlayedIn)) from games where gameId='0021700608';
+select from stats;
+select flatten(out(Statistics)['Period1']) from games where gameId='0021700608';
+select flatten(out(Statistics)['Period2']) from games where gameId='0021700608';
+select flatten(out(Statistics)['Period3']) from games where gameId='0021700608';
+select flatten(out(Statistics)['Period4']) from games where gameId='0021700608';
 ```

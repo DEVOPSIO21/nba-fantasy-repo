@@ -6,7 +6,8 @@ module.exports = {
         stats:'',
         periods: '',
         schedules: 'http://data.nba.net/data/10s/prod/v1/2017/schedule.json',
-        boxscore: 'http://data.nba.net/data/10s/prod/v1/20171003/0011700012_boxscore.json'
+        boxscore: 'http://data.nba.net/data/10s/prod/v1/20171003/0011700012_boxscore.json',
+        play_by_play: 'http://data.nba.net/data/10s/prod/v1/20171003/0011700012_pbp_1.json'
 
     }
 };
